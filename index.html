@@ -2,75 +2,63 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <script type='text/javascript' src="test1.js"></script>
-    <script type='module' src="test2.js"></script>
+    <link rel="stylesheet" href="style.css"/>
     <script type='module' src="vue.js"></script>
     <script src="https://unpkg.com/vue@next"></script>
+
+
     <title>Title</title>
 </head>
 <body>
 
-<h1 id="myH1">HELLO CAMPUS</h1>
-<h2 id="myH2">Abracadbra</h2>
-<p> - MODULE SPA</p>
-<p> - [02/08/2021]</p>
+<div id="app">
+
+    <h1 :class="{red: H1redColor}"> {{ message }}</h1>
+    <h2 :class="{red: H2redColor}"> {{ message2 }}</h2>
+
+    <input type="text" v-model="addMessage"/>
+    <button v-on:click="ajouterMessage">Let's GO</button> <br><br>
+
+    <input type="checkbox" v-model="H1redColor">
+    <label>Change color H1</label> <br>
+    <input type="checkbox" v-model="H2redColor"/>
+    <label>Change color H2</label> <br>
+    <input type="checkbox" v-model="ATM"/>
+    <label>ATM-CONSULTING</label>
 
 
-<div id="counter">
-    Compteur: {{ compteur }}
-</div>
+    <p v-bind:title="message" v-for="campusStudent in students">
+        {{ campusStudent }}
+    </p>
 
-<div id="headshot">
-    Têtes : {{headshot}}
-</div>
-
-<div class="hello">
-    Je peux mettre ce que je veux : {{htmlVUEjs}}
-</div>
-
-<div id="myDIVhtml">
-    Je suis du HTML : {{myReturnVueJS}} : Encore du HTML : {{myReturnVueJS}}
-</div>
-
-<div id="two-way-binding">
-    <p>{{ message }}</p>
-    <input v-model="message" />
-</div>
-
-<div id="H1-two-way-binding">
-    <h1>{{ h1message }}</h1>
-    <input v-model="h1message" />
-</div>
-
-<div id="H2-click-to-change">
-    <h2> {{ h2message }}</h2>
-    <button v-on:click="changeMessage">Light</button>
-    <input v-model="h2message" />
+    <img :class="{blind: ATM}" src="atm.jpg">
 
 </div>
-
-<div id="Checkbox">
-    <h1> {{ h1BlueMessage }}</h1>
-    <h2> {{ h2RedMessage }}</h2>
-    <h3> {{ h3RedMessage }}</h3>
-    <input type=checkbox > Power RED </input>
-</div>
-
-
-
-
-
-
-
-
-
 
 <script>
-    this.addEventListener('load', function (){
-    console.log(gregtest1),
-    console.log(gregtest2)
-});
+    const vm = Vue.createApp({
+        data(){
+            return {
+                message: 'h1 - Hello Campus',
+                message2: 'h2 - Red',
+                students: ['Greg', 'Steve', 'Mati'],
+                addMessage: '',
+                H1redColor:false,
+                H2redColor: false,
+                ATM: false
+            }
+        },
+        methods:{
+            ajouterMessage(){
+            this.message2 = this.addMessage
+                this.addMessage = ''
+            },
+        }
+
+    }).mount('#app');
 </script>
+
+
 
 </body>
 </html>
